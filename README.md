@@ -1,28 +1,19 @@
-# Create a Timeline component in React
+# Create a React website that uses a graphql API
 
-Create a React component that displays a Timeline of events by order of occurance, bottom to top. On Desktop, the events are to be staggered inbetween two branches, whereas on mobile they would collapse to a single branch (see [Wireframes](#the-end-result).)
+Use the provided graphql api (apollo server,) to create a React webpage that shows information about an upcoming football match. Initial teams arrangement, where and when it's played.
+The basic layout should have the two teams side by side with their starter linenup listed on each container, with the following data per player:
 
-Every 20 seconds a new event is to be added on top of the Timeline, up to a defined max (say, 5 or 6 elements.) After the cap has been reached, the last event is to be removed also. You can produce events in anyway you like, even re-use them from a predefined array.
+|lastname|firstname|position|squadNumber|
 
-Each Event is made of a:
+The listing should include controls to sort by lastname, position or squad number.
 
-- time
-- title
-- description
+Clicking on a player should bring up that player's detailed information on a separate screen.
 
 ## Constraints
 
-- The component needs to be a React component.
-- You can't use any pre-existing component libraries.
+- The website must be a SPA made in React
+- A simple instructable on how to view the example. Dependency `install` and `start` steps, at most.
+- Upload your solution to Github/Gitlab and then share it with us.
 
-## The end result
-
-### Wireframe for Desktop
-
-[<img src="timeline-desktop.jpg" width="600"/>](timeline-desktop.jpg)
-
-### Wireframe for Mobile
-
-[<img src="timeline-mobile.jpg" width="200"/>](timeline-mobile.jpg)
-
-Coloring and design are up to you. Be creative, maybe add decorations, animations/transitions that you feel would make for a good fit. Take the different aspect ratios into consideration.
+You are free to expand on the graphql API and its server, but without taking aways what's already in there.
+You can also anotate usage documentation in the way you see fit.
