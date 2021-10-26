@@ -1,38 +1,37 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 const PLAYER_DETAILS = gql`
-    fragment PlayerDetails on Player {
-        id
-        firstname
-        lastname
-        position
-        squadNumber
-    }
-`
+  fragment PlayerDetails on Player {
+    id
+    firstname
+    lastname
+    position
+    squadNumber
+  }
+`;
 
 const TEAM_DETAILS = gql`
-    ${PLAYER_DETAILS}
-    fragment TeamDetails on Team {
-        name
-        stadium
-        firstEleven {
-            ...PlayerDetails
-        }
+  ${PLAYER_DETAILS}
+  fragment TeamDetails on Team {
+    name
+    stadium
+    firstEleven {
+      ...PlayerDetails
     }
-`
+  }
+`;
 
 export const GET_NEXT_MATCH = gql`
-    ${TEAM_DETAILS}
-    query {
-        nextMatch {
-            date
-            home {
-                ...TeamDetails
-            }
-            away {
-                ...TeamDetails
-            }
-
-        }
+  ${TEAM_DETAILS}
+  query {
+    nextMatch {
+      date
+      home {
+        ...TeamDetails
+      }
+      away {
+        ...TeamDetails
+      }
     }
-`
+  }
+`;
