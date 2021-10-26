@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import TeamViewer from './TeamViewer';
 import { Match } from '../interfaces/match';
-import Card from './Card';
-import H6 from './H6';
+import Card from './generic/Card';
+import H6 from './generic/H6';
 import theme from '../theme';
 
 const StatsContainer = styled.div`

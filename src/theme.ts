@@ -1,13 +1,13 @@
 const theme = {
   palette: {
-    primary: '#e76f51',
-    attention: '#e9c46a',
+    primary: '#DA0037',
+    attention: '#6e6e6e',
     background: {
-      body: '#264653',
-      base: '#2a9d8f',
+      body: '#171717',
+      base: 'rgb(68, 68, 68, 0.5)',
     },
     text: {
-      primary: '#FFF',
+      primary: '#EDEDED',
     },
   },
   spacing: (multiplier = 1) => `${4 * multiplier}px`,

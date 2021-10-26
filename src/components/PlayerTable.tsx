@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Card from '../components/Card';
+import Card from './generic/Card';
 import { Player } from '../interfaces/player';
 import { SortableKey, sortPlayers } from '../utils/sortPlayers';
 import theme from '../theme';
@@ -55,13 +55,32 @@ const makeRow = (player: Player): JSX.Element => {
   );
 };
 
-const TableHeaders = (): JSX.Element => {
-  const headers = ['Firstname', 'Lastname', 'Position', 'Number'];
+interface TableHeadersProps {
+  /** function which is exuted when header is clicked */
+  onHeaderClick: (key: SortableKey) => void;
+}
+
+interface Header {
+  /** Key used to identify field */
+  key: SortableKey;
+  /** Name displayed to the user in the table header*/
+  displayName: string;
+}
+
+const TableHeaders = ({ onHeaderClick }: TableHeadersProps): JSX.Element => {
+  const headers: Header[] = [
+    { key: 'firstName', displayName: 'Firstname' },
+    { key: 'lastName', displayName: 'Lastname' },
+    { key: 'position', displayName: 'Position' },
+    { key: 'squadNumber', displayName: 'Number' },
+  ];
 
   return (
     <TableHeader>
-      {headers.map((v: string) => (
-        <HeaderItem>{v}</HeaderItem>
+      {headers.map((v: Header) => (
+        <HeaderItem onClick={() => onHeaderClick(v.key)} key={v.key}>
+          {v.displayName}
+        </HeaderItem>
       ))}
     </TableHeader>
   );
@@ -69,12 +88,24 @@ const TableHeaders = (): JSX.Element => {
 
 /** Component renders a table of player details*/
 const PlayerTable = ({ players }: { players: Player[] }): JSX.Element => {
-  const [sortKey, setSortKey] = React.useState<SortableKey>('lastname');
+  const [sortKey, setSortKey] = React.useState<SortableKey>('lastName');
   const [isDescending, setIsDescending] = React.useState<boolean>(false);
+
+  // Function to update sort logic when the header is clicked
+  const handleHeaderClick = (newKey: SortableKey) => {
+    // if the key hasn't changed update the sort order
+    if (newKey === sortKey) {
+      setIsDescending(!isDescending);
+    } else {
+      // otherwise updated the key and reset the order
+      setSortKey(newKey);
+      setIsDescending(false);
+    }
+  };
 
   return (
     <Table>
-      <TableHeaders />
+      <TableHeaders onHeaderClick={handleHeaderClick} />
       {sortPlayers(players, sortKey, isDescending).map((v) => makeRow(v))}
     </Table>
   );

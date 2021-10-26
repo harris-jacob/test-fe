@@ -1,6 +1,6 @@
 import { Player } from '../interfaces/player';
 
-export type SortableKey = 'firstname' | 'lastname' | 'squadNumber' | 'position';
+export type SortableKey = 'firstName' | 'lastName' | 'squadNumber' | 'position';
 
 /** Sort players by key in ascending or descending order */
 export const sortPlayers = (
@@ -20,9 +20,9 @@ const comparePlayers = (
   key: SortableKey
 ): number => {
   switch (key) {
-    case 'firstname':
+    case 'firstName':
       return stringCompare(playerA.firstname, playerB.firstname);
-    case 'lastname':
+    case 'lastName':
       return stringCompare(playerA.lastname, playerB.lastname);
     case 'position':
       return stringCompare(playerA.position, playerB.position);

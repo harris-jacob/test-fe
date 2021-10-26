@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Team } from '../interfaces/team';
 import theme from '../theme';
-import H6 from './H6';
+import H6 from './generic/H6';
 import PlayerTable from './PlayerTable';
 
 const TeamHeading = styled(H6)`
