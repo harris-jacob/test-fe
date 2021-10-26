@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import TeamViewer from './TeamVIewer';
+import TeamViewer from './TeamViewer';
 import { Match } from '../interfaces/match';
 import Card from './Card';
 import H6 from './H6';
