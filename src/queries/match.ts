@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 
 const PLAYER_DETAILS = gql`
     fragment PlayerDetails on Player {
+        id
         firstname
         lastname
         position

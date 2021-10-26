@@ -3,6 +3,7 @@ import Card from '../components/Card';
 import { Player } from "../interfaces/player";
 import theme from "../theme";
 import { Team } from "../interfaces/team";
+import H6 from "./H6";
 
 const Table = styled.table`
     text-align: left;
@@ -23,10 +24,17 @@ const TableHeader = styled.th`
     padding: ${theme.spacing(3)};
 `
 
-const makeRow = (player: Player): JSX.Element => {
-    const {__typename, ...restPlayer} = player;
+const TeamHeading = styled(H6)`
+    padding: ${theme.spacing(2)};
+    text-transform: uppercase;
+`
 
-   return <TableRow>{Object.values(restPlayer).map((v: string) => <TableItem>{v}</TableItem>)}</TableRow> 
+
+
+const makeRow = (player: Player): JSX.Element => {
+    const {__typename, id, ...restPlayer} = player;
+
+   return <TableRow key={id}>{Object.entries(restPlayer).map((v) => <TableItem key={v[0]}>{v[1]}</TableItem>)}</TableRow> 
 }
 
 const TableHeaders = (): JSX.Element => {
@@ -36,15 +44,27 @@ const TableHeaders = (): JSX.Element => {
 }
 
 
+
+
+
 /** Component that shows player stats of a whole team */
 const TeamViewer = ({team}: {team: Team}): JSX.Element => {
+
+    const playerTable = (
+        <Card>
+            <TeamHeading>{`${team.name} Starting Lineup`}</TeamHeading>
+            <Table>
+                <TableHeaders/>
+                {team.firstEleven.map((v: Player) => makeRow(v))}
+            </Table>
+        </Card>
+    )
+
+
     return (
-    <Card>
-        <Table>
-            <TableHeaders/>
-            {team.firstEleven.map((v: Player) => makeRow(v))}
-        </Table>
-    </Card>
+        <div>
+            {playerTable}
+        </div>
     )
 }
 
