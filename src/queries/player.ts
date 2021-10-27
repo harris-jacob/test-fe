@@ -1,6 +1,4 @@
 import { gql } from '@apollo/client';
-import { ID } from '../interfaces/generic';
-import { Player } from '../interfaces/player';
 
 export const PLAYER_SUMMARY = gql`
   fragment PlayerSummary on Player {
