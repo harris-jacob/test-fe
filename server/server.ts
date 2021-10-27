@@ -12,7 +12,6 @@ const typeDefs = fs.readFileSync(
 const resolvers = {
   RootQueryType: {
     player(_: unknown, args: { id: string }, __: unknown) {
-      console.log(args);
       const { id } = args;
       const player = getPlayers().find((v) => v.id === id);
       if (player === undefined) {

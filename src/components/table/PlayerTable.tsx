@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Card from './generic/Card';
-import { Player, PlayerSummary } from '../interfaces/player';
-import { usePlayerSort } from '../hooks/usePlayerSort';
-import theme from '../theme';
-import { SortableKey } from '../utils/sortPlayers';
-import { ID } from '../interfaces/generic';
+import { Player, PlayerSummary } from '../../interfaces/player';
+import { usePlayerSort } from '../../hooks/usePlayerSort';
+import Card from '../generic/Card';
+import TableHeaders from './TableHeaders';
+import theme from '../../theme';
+import { ID } from '../../interfaces/generic';
 
 const Table = styled.div`
   text-align: left;
@@ -32,19 +32,6 @@ const TableItem = styled.div`
   padding: ${theme.spacing(3)};
 `;
 
-const TableHeader = styled.div`
-  display: table-row;
-`;
-
-const HeaderItem = styled.div`
-  ${theme.typography.h6}
-  display: table-cell;
-  padding: ${theme.spacing(3)};
-  &:hover {
-    background-color: ${theme.palette.attention};
-  }
-`;
-
 interface RowProps {
   player: PlayerSummary;
   onClick: () => void;
@@ -59,37 +46,6 @@ const Row = ({ player, onClick }: RowProps): JSX.Element => {
         <TableItem key={v[0]}>{v[1]}</TableItem>
       ))}
     </TableRow>
-  );
-};
-
-interface TableHeadersProps {
-  /** function which is exuted when header is clicked */
-  onHeaderClick: (key: SortableKey) => void;
-}
-
-interface Header {
-  /** Key used to identify field */
-  key: SortableKey;
-  /** Name displayed to the user in the table header*/
-  displayName: string;
-}
-
-const TableHeaders = ({ onHeaderClick }: TableHeadersProps): JSX.Element => {
-  const headers: Header[] = [
-    { key: 'firstName', displayName: 'Firstname' },
-    { key: 'lastName', displayName: 'Lastname' },
-    { key: 'position', displayName: 'Position' },
-    { key: 'squadNumber', displayName: 'Number' },
-  ];
-
-  return (
-    <TableHeader>
-      {headers.map((v: Header) => (
-        <HeaderItem onClick={() => onHeaderClick(v.key)} key={v.key}>
-          {v.displayName}
-        </HeaderItem>
-      ))}
-    </TableHeader>
   );
 };
 

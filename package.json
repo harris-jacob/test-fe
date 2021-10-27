@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "concurrently --kill-others \"yarn start-server\"  \"wait-on tcp:3001 && yarn start-web\"",
-    "start-server": "npx nodemon --watch ./server/schema.graphql --watch ./server/server.ts --exec 'ts-node --project ./server/tsconfig.json' ./server/server.ts",
+    "start-server": "npx nodemon --watch ./server/schema.graphql --watch ./server/database.ts ./server/server.ts --exec 'ts-node --project ./server/tsconfig.json' ./server/server.ts",
     "start-web": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

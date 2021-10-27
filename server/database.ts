@@ -73,6 +73,8 @@ let db: InternalMatch = generateMatch();
 
 /** return match from db */
 export const getMatch = (): InternalMatch => {
+  // generate new match on next match request
+  db = generateMatch();
   return db;
 };
 

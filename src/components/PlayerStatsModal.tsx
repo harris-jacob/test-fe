@@ -9,7 +9,9 @@ import styled from 'styled-components';
 import theme from '../theme';
 
 interface Props {
+  /** ID of the player whos stats to fetch */
   id: ID<Player>;
+  /** When close button is clicked */
   onClose: () => void;
 }
 
