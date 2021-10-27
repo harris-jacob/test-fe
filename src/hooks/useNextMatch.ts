@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
-import { GET_NEXT_MATCH } from './queries/match';
-import { Match } from './interfaces/match';
+import { GET_NEXT_MATCH } from '../queries/match';
+import { Match } from '../interfaces/match';
 
 interface Response {
   nextMatch: Match;

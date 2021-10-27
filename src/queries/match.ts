@@ -1,22 +1,13 @@
 import { gql } from '@apollo/client';
-
-const PLAYER_DETAILS = gql`
-  fragment PlayerDetails on Player {
-    id
-    firstname
-    lastname
-    position
-    squadNumber
-  }
-`;
+import { PLAYER_SUMMARY } from './player';
 
 const TEAM_DETAILS = gql`
-  ${PLAYER_DETAILS}
+  ${PLAYER_SUMMARY}
   fragment TeamDetails on Team {
     name
     stadium
     firstEleven {
-      ...PlayerDetails
+      ...PlayerSummary
     }
   }
 `;

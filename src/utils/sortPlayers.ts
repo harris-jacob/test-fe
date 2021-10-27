@@ -1,22 +1,24 @@
-import { Player } from '../interfaces/player';
+import { PlayerSummary } from '../interfaces/player';
 
 export type SortableKey = 'firstName' | 'lastName' | 'squadNumber' | 'position';
 
 /** Sort players by key in ascending or descending order */
 export const sortPlayers = (
-  players: Player[],
+  players: PlayerSummary[],
   key: SortableKey,
   descending = false
-): Player[] => {
+): PlayerSummary[] => {
   const newPlayers = [...players];
-  newPlayers.sort((a: Player, b: Player) => comparePlayers(a, b, key));
+  newPlayers.sort((a: PlayerSummary, b: PlayerSummary) =>
+    comparePlayers(a, b, key)
+  );
 
   return descending ? newPlayers.reverse() : newPlayers;
 };
 
 const comparePlayers = (
-  playerA: Player,
-  playerB: Player,
+  playerA: PlayerSummary,
+  playerB: PlayerSummary,
   key: SortableKey
 ): number => {
   switch (key) {

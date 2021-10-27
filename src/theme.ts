@@ -1,10 +1,12 @@
 const theme = {
   palette: {
-    primary: '#DA0037',
+    primary: '#c8d8e4',
+    secondary: '#c8d8e4',
     attention: '#6e6e6e',
     background: {
       body: '#171717',
       base: 'rgb(68, 68, 68, 0.5)',
+      modal: 'rgb(68, 68, 68)',
     },
     text: {
       primary: '#EDEDED',

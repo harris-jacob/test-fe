@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import Card from './generic/Card';
-import { Player } from '../interfaces/player';
-import { SortableKey, sortPlayers } from '../utils/sortPlayers';
+import { Player, PlayerSummary } from '../interfaces/player';
+import { usePlayerSort } from '../hooks/usePlayerSort';
 import theme from '../theme';
+import { SortableKey } from '../utils/sortPlayers';
+import { ID } from '../interfaces/generic';
 
 const Table = styled.div`
   text-align: left;
@@ -43,11 +45,16 @@ const HeaderItem = styled.div`
   }
 `;
 
-const makeRow = (player: Player): JSX.Element => {
+interface RowProps {
+  player: PlayerSummary;
+  onClick: () => void;
+}
+
+const Row = ({ player, onClick }: RowProps): JSX.Element => {
   const { __typename, id, ...restPlayer } = player;
 
   return (
-    <TableRow key={id}>
+    <TableRow onClick={onClick} key={id}>
       {Object.entries(restPlayer).map((v) => (
         <TableItem key={v[0]}>{v[1]}</TableItem>
       ))}
@@ -86,27 +93,25 @@ const TableHeaders = ({ onHeaderClick }: TableHeadersProps): JSX.Element => {
   );
 };
 
-/** Component renders a table of player details*/
-const PlayerTable = ({ players }: { players: Player[] }): JSX.Element => {
-  const [sortKey, setSortKey] = React.useState<SortableKey>('lastName');
-  const [isDescending, setIsDescending] = React.useState<boolean>(false);
+interface PlayerTableProps {
+  /** List of players to show in table */
+  players: PlayerSummary[];
+  /** function executed when a player is clicked on */
+  onPlayerSelect(id: ID<Player>): void;
+}
 
-  // Function to update sort logic when the header is clicked
-  const handleHeaderClick = (newKey: SortableKey) => {
-    // if the key hasn't changed update the sort order
-    if (newKey === sortKey) {
-      setIsDescending(!isDescending);
-    } else {
-      // otherwise updated the key and reset the order
-      setSortKey(newKey);
-      setIsDescending(false);
-    }
-  };
+/** Component renders a table of player details*/
+const PlayerTable = (props: PlayerTableProps): JSX.Element => {
+  const { players, onPlayerSelect } = props;
+
+  const { sortedPlayers, sortHandler } = usePlayerSort(players);
 
   return (
     <Table>
-      <TableHeaders onHeaderClick={handleHeaderClick} />
-      {sortPlayers(players, sortKey, isDescending).map((v) => makeRow(v))}
+      <TableHeaders onHeaderClick={sortHandler} />
+      {sortedPlayers.map((v) => (
+        <Row key={v.id} onClick={() => onPlayerSelect(v.id)} player={v} />
+      ))}
     </Table>
   );
 };
